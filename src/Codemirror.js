@@ -63,13 +63,11 @@ const CodeMirror = createReactClass({
 		}
 	},
 	componentWillReceiveProps: function (nextProps) {
+		this.codeMirror.setValue(nextProps.value);
 		if (this.codeMirror && nextProps.value !== undefined && nextProps.value !== this.props.value && normalizeLineEndings(this.codeMirror.getValue()) !== normalizeLineEndings(nextProps.value)) {
 			if (this.props.preserveScrollPosition) {
 				var prevScrollPosition = this.codeMirror.getScrollInfo();
-				this.codeMirror.setValue(nextProps.value);
 				this.codeMirror.scrollTo(prevScrollPosition.left, prevScrollPosition.top);
-			} else {
-				this.codeMirror.setValue(nextProps.value);
 			}
 		}
 		if (typeof nextProps.options === 'object') {
